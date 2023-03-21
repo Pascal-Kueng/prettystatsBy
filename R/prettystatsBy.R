@@ -30,7 +30,7 @@
 #'
 #'
 statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, ...) {
-
+  # Reference Object that is modified
   statsByObject <- psych::statsBy(data = data, group = group, alpha = alpha, ...)
 
   cors05 <- get_confidence_intervals(data = data, group = group, alpha = 0.05, ...)
@@ -42,12 +42,15 @@ statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, .
 
   combined <- combine_matrices(within, between)
 
-  # rename the variables.
+  # rename the variables and annotate tables
+  var_names <- var_names[var_names != group]
+
   annotation_combined <- "Note. Within-group correlations are in the upper triangle, between-group correlations in the lower triangle."
   annotation <- "*CI(95%) significant, **CI(99%) significant, ***CI(99.9%) significant."
   statsByObject$pretty.within <- list(matrix_to_tibble(within, var_names), annotation)
   statsByObject$pretty.between <- list(matrix_to_tibble(between, var_names), annotation)
   statsByObject$pretty.combined <- list(matrix_to_tibble(combined, var_names), annotation_combined, annotation)
+  statsByObject$pretty <- list(statsByObject$pretty.within, statsByObject$pretty.between, statsByObject$pretty.combined)
 
   return(statsByObject)
 }
