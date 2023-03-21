@@ -1,7 +1,7 @@
 # Pretty statsBy
 Extending the statsBy Funtionality of the Psych Package.
 ## Installation
-You can install this package directly from github using devtools:
+You can install this package by running the following in your R-installation:
 ```R
 install.packages("devtools")
 devtools::install_github("Pascal-Kueng/prettystatsBy")
