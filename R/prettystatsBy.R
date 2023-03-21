@@ -29,18 +29,18 @@
 #' print(statsByObject$pretty.combined) # top half are within-correlations, bottom half are between correlations.
 #'
 #'
-statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, ...) {
+statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, pretty_alphas = c(0.05, 0.01, 0.001), ...) {
 
   data <- as.data.frame(data)
 
-
+  pretty_alphas <- prepare_alphas(pretty_alphas)
 
   # Reference Object that is modified
   statsByObject <- psych::statsBy(data = data, group = group, alpha = alpha, ...)
 
-  cors05 <- get_confidence_intervals(data = data, group = group, alpha = 0.05, ...)
-  cors01 <- get_confidence_intervals(data = data, group = group, alpha = 0.01, ...)
-  cors001 <- get_confidence_intervals(data = data, group = group, alpha = 0.001, ...)
+  cors05 <- get_confidence_intervals(data = data, group = group, alpha = pretty_alphas[1], ...)
+  cors01 <- get_confidence_intervals(data = data, group = group, alpha = pretty_alphas[2], ...)
+  cors001 <- get_confidence_intervals(data = data, group = group, alpha = pretty_alphas[3], ...)
 
   within <- convert_to_matrix(cors05$within_cors, cors01$within_cors, cors001$within_cors)
   between <- convert_to_matrix(cors05$between_cors, cors01$between_cors, cors001$between_cors)
@@ -49,7 +49,7 @@ statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, .
 
   # rename the variables and annotate tables
   annotation_combined <- "Note. Within-group correlations are in the upper triangle, between-group correlations in the lower triangle."
-  annotation <- "*CI(95%) significant, **CI(99%) significant, ***CI(99.9%) significant."
+  annotation <- sprintf("*CI(%s%%) significant, **CI(%s%%) significant, ***CI(%s%%) significant.", ((1-pretty_alphas[1]) * 100), ((1-pretty_alphas[2]) * 100), ((1-pretty_alphas[3]) * 100))
   statsByObject$pretty.within <- list(matrix_to_tibble(within, var_names), annotation)
   statsByObject$pretty.between <- list(matrix_to_tibble(between, var_names), annotation)
   statsByObject$pretty.combined <- list(matrix_to_tibble(combined, var_names), annotation_combined, annotation)
@@ -57,6 +57,24 @@ statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, .
 
   return(statsByObject)
 }
+
+
+prepare_alphas <- function(pretty_alphas) {
+  if (length(pretty_alphas) == 0){
+    return(pretty_alphas)
+  } else if (length(pretty_alphas) != 3) {
+    stop("Provide a vector of three alpha levels for 'pretty_alphas'")
+  } else if (!all(sapply(pretty_alphas, function(x) is.numeric(x) && x > 0 && x < 1))) {
+    stop("pretty_alphas must be between 0 and 1")
+  } else {
+
+    pretty_alphas <- sort(pretty_alphas)
+    return(pretty_alphas)
+  }
+
+
+}
+
 
 get_confidence_intervals <- function(data = NULL, group = NULL, alpha = NULL, ...) {
   statsByObject <- suppressWarnings(psych::statsBy(data = data, group = group, alpha = alpha, ...))
