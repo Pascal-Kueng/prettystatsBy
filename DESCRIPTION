@@ -1,17 +1,19 @@
 Package: prettystatsBy
 Type: Package
-Title: Extending the statsBy Funtionality of the Psych Package. 
+Title: Extending the 'statsBy' Funtionality of the Psych Package.
 Version: 0.1.0
-Author: Pascal M. Küng
-Maintainer: Pascal M. Küng <pascal.kueng@psychologie.uzh.ch>
+Author: Pascal Küng
+Maintainer: Pascal Küng <pascal.kueng@psychologie.uzh.ch>
 Description: This package is a wrapper around the statsBy function from the
     pych library. Once loaded, this package replaces the statsBy function of 
     the psych package and extends the functionality.
-    It adds correlation tables with indications of significance for
-    both within-, between-, and combined matrices. This is done by infering the
-    significance via calculating the confidence intervals using the three common 
-    significance levels 0.05, 0.01, and 0.001. These tables can be accessed via
-    within, between, or combined functions
+    The function returns a statsBy object that retains all functionality 
+    of the original object (psych package), while extending the functionality. 
+    The function automatically calculates confidence intervals with the 
+    alpha levels of 0.05, 0.01, and 0.001 and provides formatted correlation 
+    tables with indications of significance. All original calls and exact 
+    confidence intervals for the alpha level provided to the function can 
+    still be obtained via the regular functionality of the statsBy function.
 License: Apache-2.0
 Encoding: UTF-8
 LazyData: true
