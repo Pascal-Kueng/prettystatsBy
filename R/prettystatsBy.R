@@ -81,7 +81,7 @@ convert_to_matrix <- function(input_cors05, input_cors01, input_cors001) {
 
     # Adding stars according to significance levels
 
-    r_value <- round(input_cors05[i, 2], 2)
+    r_value <- format(round(input_cors05[i, 2], 2), nsmall = 2)
     if (is.na(lower05) | is.na(lower01) | is.na(lower001)) {
       r_with_star <- "-"
     } else if (lower05 < 0 && upper05 > 0) {
