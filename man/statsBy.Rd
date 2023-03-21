@@ -26,25 +26,27 @@ by this specific package.}
 \item{var_names}{a list of names that are used for pretty printing}
 
 \item{pretty_alphas}{you may provide a list of 3 alpha levels that are used
-to calculate the confidence interval for the prettystatsBy output.}
+to calculate the confidence interval for the prettystatsBy output.?p}
 
 \item{...}{Refer to the psych::statsBy documentation for additional parameters.}
 }
 \value{
 The function returns a psych::statsBy object that retains all
    functionality of the original object, while extending the functionality.
-   The function automatically calculates confidence intervals with the alpha
-   levels of 0.05, 0.01, and 0.001 and provides formatted correlation tables
-   with indications of significance. All original calls and exact confidence
-   intervals for the alpha level provided to the function can still be
-   obtained via the regular functionality of the psych::statsBy function.
+   The function automatically calculates confidence intervals with the
+   alpha leves specified in pretty_alphas and provides formatted correlation
+   tables with indications of significance. All original calls and exact
+   confidence intervals for the single alpha level provided to the function can
+   still be obtained via the regular functionality of the psych::statsBy function.
 }
 \description{
 Extending the statsBy Funtionality of the Psych Package.
 }
 \examples{
-# create the object
+# create the object (example 1)
 statsByObject <- statsBy(df[,vars], df$userID, var_names=vars)
+# create the object (example 2)
+statsByObject <- statsBy(df, 'userID', var_names=colnames(df))
 
 # extract information
 print(statsByObject) # To explore the original functionality
