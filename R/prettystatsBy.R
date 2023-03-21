@@ -33,9 +33,7 @@ statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, .
 
   data <- as.data.frame(data)
 
-  if (!is.numeric(group)) {
-    var_names <- var_names[var_names != group]
-  }
+
 
   # Reference Object that is modified
   statsByObject <- psych::statsBy(data = data, group = group, alpha = alpha, ...)
