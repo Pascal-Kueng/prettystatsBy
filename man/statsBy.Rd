@@ -4,7 +4,14 @@
 \alias{statsBy}
 \title{Extending the statsBy Funtionality of the Psych Package.}
 \usage{
-statsBy(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, ...)
+statsBy(
+  data = NULL,
+  group = NULL,
+  alpha = 0.05,
+  var_names = NULL,
+  pretty_alphas = c(0.05, 0.01, 0.001),
+  ...
+)
 }
 \arguments{
 \item{data}{Dataframe only including Variables to be included in correlation table.}
@@ -17,6 +24,9 @@ psych::statsBy function, but is not used for the functionality provided
 by this specific package.}
 
 \item{var_names}{a list of names that are used for pretty printing}
+
+\item{pretty_alphas}{you may provide a list of 3 alpha levels that are used
+to calculate the confidence interval for the prettystatsBy output.}
 
 \item{...}{Refer to the psych::statsBy documentation for additional parameters.}
 }
