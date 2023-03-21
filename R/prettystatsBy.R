@@ -28,9 +28,10 @@
 #'
 #' # extract information
 #' print(statsByObject) # To explore the original functionality
-#' print(statsByObject$pretty.within) # Full within- cluster correlation matrix
-#' print(statsByObject$pretty.between) # Full between- cluster correlation matrix
-#' print(statsByObject$pretty.combined) # top half are within-correlations, bottom half are between correlations.
+#' print(statsByObject$pretty # Access all correlation matrices this package adds.
+#' print(statsByObject$pretty$within) # Full within- cluster correlation matrix
+#' print(statsByObject$pretty$between) # Full between- cluster correlation matrix
+#' print(statsByObject$pretty$combined) # top half are within-correlations, bottom half are between correlations.
 #'
 #'
 statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, pretty_alphas = c(0.05, 0.01, 0.001), ...) {
