@@ -33,6 +33,20 @@ statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, p
 
   data <- as.data.frame(data)
 
+  # if group is provided via the $ operator, we check if it is also in the data and remove it if yes.
+  if (is.character(group)){
+    var_names <- var_names[var_names!=group]
+  } else {
+    for (i in 1:length(data)) {
+      if (identical(data[[i]], group)) {
+        group_name <- colnames(data[i])
+        data <- data[,-i]
+        var_names <- var_names[-i]
+        break
+      }
+    }
+  }
+
   pretty_alphas <- prepare_alphas(pretty_alphas)
 
   # Reference Object that is modified
@@ -68,7 +82,7 @@ prepare_alphas <- function(pretty_alphas) {
     stop("pretty_alphas must be between 0 and 1")
   } else {
 
-    pretty_alphas <- sort(pretty_alphas)
+    pretty_alphas <- sort(pretty_alphas, decreasing=TRUE)
     return(pretty_alphas)
   }
 
