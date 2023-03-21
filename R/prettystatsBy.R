@@ -19,11 +19,14 @@
 #'    obtained via the regular functionality of the psych::statsBy function.
 #' @export
 #'
-#' @examples statsByObject <- statsBy(df[,vars], df$userID, var_names=vars)
-#'    print(statsByObject) # To explore the original functionality
-#'    print(statsByObject$pretty.within) # Full within- cluster correlation matrix
-#'    print(statsByObject$pretty.between) # Full between- cluster correlation matrix
-#'    print(statsByObject$pretty.combined) # top half are within-correlations, bottom half are between correlations.
+#' @examples # create the object
+#' statsByObject <- statsBy(df[,vars], df$userID, var_names=vars)
+#'
+#' # extract information
+#' print(statsByObject) # To explore the original functionality
+#' print(statsByObject$pretty.within) # Full within- cluster correlation matrix
+#' print(statsByObject$pretty.between) # Full between- cluster correlation matrix
+#' print(statsByObject$pretty.combined) # top half are within-correlations, bottom half are between correlations.
 #'
 #'
 statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, ...) {

@@ -33,11 +33,14 @@ The function returns a psych::statsBy object that retains all
 Extending the statsBy Funtionality of the Psych Package.
 }
 \examples{
+# create the object
 statsByObject <- statsBy(df[,vars], df$userID, var_names=vars)
-   print(statsByObject) # To explore the original functionality
-   print(statsByObject$pretty.within) # Full within- cluster correlation matrix
-   print(statsByObject$pretty.between) # Full between- cluster correlation matrix
-   print(statsByObject$pretty.combined) # top half are within-correlations, bottom half are between correlations.
+
+# extract information
+print(statsByObject) # To explore the original functionality
+print(statsByObject$pretty.within) # Full within- cluster correlation matrix
+print(statsByObject$pretty.between) # Full between- cluster correlation matrix
+print(statsByObject$pretty.combined) # top half are within-correlations, bottom half are between correlations.
 
 
 }
