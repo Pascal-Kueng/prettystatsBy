@@ -30,6 +30,13 @@
 #'
 #'
 statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, ...) {
+
+  data <- as.data.frame(data)
+
+  if (!is.numeric(group)) {
+    var_names <- var_names[var_names != group]
+  }
+
   # Reference Object that is modified
   statsByObject <- psych::statsBy(data = data, group = group, alpha = alpha, ...)
 
@@ -43,8 +50,6 @@ statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, .
   combined <- combine_matrices(within, between)
 
   # rename the variables and annotate tables
-  var_names <- var_names[var_names != group]
-
   annotation_combined <- "Note. Within-group correlations are in the upper triangle, between-group correlations in the lower triangle."
   annotation <- "*CI(95%) significant, **CI(99%) significant, ***CI(99.9%) significant."
   statsByObject$pretty.within <- list(matrix_to_tibble(within, var_names), annotation)
