@@ -50,7 +50,7 @@ statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, .
   statsByObject$pretty.within <- list(matrix_to_tibble(within, var_names), annotation)
   statsByObject$pretty.between <- list(matrix_to_tibble(between, var_names), annotation)
   statsByObject$pretty.combined <- list(matrix_to_tibble(combined, var_names), annotation_combined, annotation)
-  statsByObject$pretty <- list(statsByObject$pretty.within, statsByObject$pretty.between, statsByObject$pretty.combined)
+  statsByObject$pretty <- list(within = statsByObject$pretty.within, between = statsByObject$pretty.between, combined = statsByObject$pretty.combined)
 
   return(statsByObject)
 }
