@@ -73,16 +73,17 @@ statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, p
                                     sprintf("*(%s%%) CIs", ((1-pretty_alphas[2]) * 100)),
                                     sprintf("*(%s%%) CIs", ((1-pretty_alphas[3]) * 100)))
 
-  pretty.ciw <- list(cors05$within_cors,
-                     cors01$within_cors,
-                     cors001$within_cors)
+  statsByObject$pretty.ciw <- list(cors05$within_cors,
+                                   cors01$within_cors,
+                                   cors001$within_cors)
 
-  pretty.cib <- list(cors05$between_cors,
-                     cors01$between_cors,
-                     cors001$between_cors)
+  statsByObject$pretty.cib <- list(cors05$between_cors,
+                                   cors01$between_cors,
+                                   cors001$between_cors)
 
-  statsByObject$pretty.ciw <- setNames(as.list(names_sign_levels, pretty.ciw))
-  statsByObject$pretty.cib <- setNames(as.list(names_sign_levels, pretty.cib))
+  names(statsByObject$pretty.ciw) <- names_sign_levels
+  names(statsByObject$pretty.cib) <- names_sign_levels
+
 
   # actually make it pretty :)
   within <- convert_to_matrix(cors05$within_cors, cors01$within_cors, cors001$within_cors)
