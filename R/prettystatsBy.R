@@ -25,9 +25,6 @@
 #' confidence intercals for the three provided alpha levels.
 #'
 #'
-#' @seealso [psych::statsBy()] which this function wraps.
-#'
-#'
 #'
 #' @examples # create the object (example 1)
 #' statsByObject <- statsBy(df[,vars], df$userID, var_names=vars)
@@ -41,7 +38,8 @@
 #' print(statsByObject$pretty$between) # Full between- cluster correlation matrix
 #' print(statsByObject$pretty$combined) # top half are within-correlations, bottom half are between correlations.
 #'
-#'
+
+
 statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, pretty_alphas = c(0.05, 0.01, 0.001), ...) {
 
   data <- as.data.frame(data)
