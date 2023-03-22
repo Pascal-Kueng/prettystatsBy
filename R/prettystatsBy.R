@@ -69,9 +69,9 @@ statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, p
   cors001 <- get_confidence_intervals(data = data, group = group, alpha = pretty_alphas[3], ...)
 
   # attach confidence intervals (not pretty) to Object.
-  names_sign_levels <- list(sprintf("*(%s%%) CIs", ((1-pretty_alphas[1]) * 100)),
-                                    sprintf("*(%s%%) CIs", ((1-pretty_alphas[2]) * 100)),
-                                    sprintf("*(%s%%) CIs", ((1-pretty_alphas[3]) * 100)))
+  names_sign_levels <- list(sprintf("%s%% CI", ((1-pretty_alphas[1]) * 100)),
+                                    sprintf("%s%% CI", ((1-pretty_alphas[2]) * 100)),
+                                    sprintf("%s%% CI", ((1-pretty_alphas[3]) * 100)))
 
   statsByObject$pretty.ciw <- list(cors05$within_cors,
                                    cors01$within_cors,
@@ -93,7 +93,7 @@ statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, p
 
   # rename the variables and annotate tables
   annotation_combined <- "Note. Within-group correlations are in the upper triangle above the diagonal, between-group correlations in the lower triangle."
-  annotation <- sprintf("*(%s%%) CI excludes zero, **(%s%%) CI excludes zero, ***(%s%%) CI excludes zero.", ((1-pretty_alphas[1]) * 100), ((1-pretty_alphas[2]) * 100), ((1-pretty_alphas[3]) * 100))
+  annotation <- sprintf("*%s excludes zero, **%s excludes zero, ***%s excludes zero.", names_sign_levels[1], names_sign_levels[2], names_sign_levels[3])
   statsByObject$pretty.within <- list(matrix_to_tibble(within, var_names), annotation)
   statsByObject$pretty.between <- list(matrix_to_tibble(between, var_names), annotation)
   statsByObject$pretty.combined <- list(matrix_to_tibble(combined, var_names), annotation_combined, annotation)
