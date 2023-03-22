@@ -49,15 +49,17 @@ print(statsByObject$pretty$combined) # top half are within-correlations, bottom 
 
 ```
 ## Citation
-Don't forget to also cite the psych package. To cite prettystatsBy in publications you can use:
 
-*Küng P (2023). PrettystatsBy: Extending the 'statsBy' Functionality of the Pych Package. R package version 0.1.0, <https://github.com/Pascal-Kueng/prettystatsBy>.*
+Don't forget to also cite the psych package. To cite prettystatsBy in publications use:
+
+*Küng P (2023). PrettystatsBy: Extending the 'statsBy' Functionality of the Pych Package. University of Zurich. R package version 0.1.0, https://github.com/Pascal-Kueng/prettystatsBy.*
 
 BibTeX-Entry:
 
   @Manual{,
     title = {PrettystatsBy: Extending the 'statsBy' Functionality of the Pych Package},
     author = {Pascal Küng},
+    organization = {University of Zurich},
     year = {2023},
     note = {R package version 0.1.0},
     url = {https://github.com/Pascal-Kueng/prettystatsBy},
