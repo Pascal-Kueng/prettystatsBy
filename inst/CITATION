@@ -5,9 +5,9 @@ note <- sprintf("R package version %s", meta$Version)
 
 
 bibentry(bibtype = "Manual",
-         title = "PrettystatsBy: Extending the 'statsBy' Functionality of the Pych Package",
+         title = "PrettystatsBy: Extending the 'statsBy' Functionality of the Psych Package",
          author = c(person("Pascal", "Küng")),
-         organization = "University of Zurich",
+         organization = "University of Zürich",
          year = "2023",
          note = note,
 	 url = "https://github.com/Pascal-Kueng/prettystatsBy")

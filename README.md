@@ -1,6 +1,9 @@
 # Pretty statsBy
 
-Extending the statsBy Funtionality of the Psych Package. \## Installation You can install this package by running the following in your R-installation:
+Extending the statsBy Funtionality of the Psych Package.
+
+## Installation 
+You can install this package by running the following in your R-installation:
 
 ``` r
 install.packages("devtools")
@@ -57,15 +60,15 @@ print(statsByObject$pretty$combined) # top half are within-correlations, bottom 
 
 Don't forget to also cite the psych package. To cite prettystatsBy in publications use:
 
-*Küng P (2023). PrettystatsBy: Extending the 'statsBy' Functionality of the Pych Package. University of Zurich. R package version 0.1.0, <https://github.com/Pascal-Kueng/prettystatsBy>.*
+*Küng P (2023). PrettystatsBy: Extending the 'statsBy' Functionality of the Psych Package. University of Zürich. R package version 0.1.0, <https://github.com/Pascal-Kueng/prettystatsBy>.*
 
 BibTeX-Entry:
 
 ``` bibtex
   @Manual{,
-    title = {PrettystatsBy: Extending the 'statsBy' Functionality of the Pych Package},
+    title = {PrettystatsBy: Extending the 'statsBy' Functionality of the Psych Package},
     author = {Pascal Küng},
-    organization = {University of Zurich},
+    organization = {University of Zürich},
     year = {2023},
     note = {R package version 0.1.0},
     url = {https://github.com/Pascal-Kueng/prettystatsBy},
