@@ -1,6 +1,6 @@
 Package: prettystatsBy
 Type: Package
-Title: Extending the 'statsBy' Funtionality of the Psych Package.
+Title: Extending the 'statsBy' Funtionality of the Psych Package
 Version: 0.1.0
 Author: Pascal Küng
 Maintainer: Pascal Küng <pascal.kueng@psychologie.uzh.ch>
