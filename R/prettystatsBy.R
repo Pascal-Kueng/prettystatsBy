@@ -68,21 +68,7 @@ statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, p
   cors01 <- get_confidence_intervals(data = data, group = group, alpha = pretty_alphas[2], ...)
   cors001 <- get_confidence_intervals(data = data, group = group, alpha = pretty_alphas[3], ...)
 
-  # attach confidence intervals (not pretty) to Object.
-  names_sign_levels <- list(sprintf("*(%s%%) CIs", ((1-pretty_alphas[1]) * 100)),
-                                    sprintf("*(%s%%) CIs", ((1-pretty_alphas[2]) * 100)),
-                                    sprintf("*(%s%%) CIs", ((1-pretty_alphas[3]) * 100)))
 
-  pretty.ciw <- list(cors05$within_cors,
-                     cors01$within_cors,
-                     cors001$within_cors)
-
-  pretty.cib <- list(cors05$between_cors,
-                     cors01$between_cors,
-                     cors001$between_cors)
-
-  statsByObject$pretty.ciw <- setNames(as.list(names_sign_levels, pretty.ciw))
-  statsByObject$pretty.cib <- setNames(as.list(names_sign_levels, pretty.cib))
 
   # actually make it pretty :)
   within <- convert_to_matrix(cors05$within_cors, cors01$within_cors, cors001$within_cors)
