@@ -1,5 +1,5 @@
 
-#' Extending the statsBy Funtionality of the Psych Package.
+#' Extending the statsBy Funtionality of the Psych Package
 #'
 #' @param data Dataframe only including Variables to be included in correlation table.
 #' @param group Clustering variable, such as a personID
@@ -19,7 +19,15 @@
 #'    tables with indications of significance. All original calls and exact
 #'    confidence intervals for the single alpha level provided to the function can
 #'    still be obtained via the regular functionality of the psych::statsBy function.
-#' @export
+#'
+#' @returns use `Object$pretty`: provides a list of three dataframes ready for exporting.
+#' @returns use `Object$pretty.ciw` or `Object$pretty.cib` to obtain lists of
+#' confidence intercals for the three provided alpha levels.
+#'
+#'
+#' @seealso [psych::statsBy()] which this function wraps.
+#'
+#'
 #'
 #' @examples # create the object (example 1)
 #' statsByObject <- statsBy(df[,vars], df$userID, var_names=vars)
@@ -57,18 +65,36 @@ statsBy <- function(data = NULL, group = NULL, alpha = 0.05, var_names = NULL, p
   # Reference Object that is modified
   statsByObject <- psych::statsBy(data = data, group = group, alpha = alpha, ...)
 
+  # get and order the significance levels
   cors05 <- get_confidence_intervals(data = data, group = group, alpha = pretty_alphas[1], ...)
   cors01 <- get_confidence_intervals(data = data, group = group, alpha = pretty_alphas[2], ...)
   cors001 <- get_confidence_intervals(data = data, group = group, alpha = pretty_alphas[3], ...)
 
+  # attach confidence intervals (not pretty) to Object.
+  names_sign_levels <- list(sprintf("*(%s%%) CIs", ((1-pretty_alphas[1]) * 100)),
+                                    sprintf("*(%s%%) CIs", ((1-pretty_alphas[2]) * 100)),
+                                    sprintf("*(%s%%) CIs", ((1-pretty_alphas[3]) * 100)))
+
+  pretty.ciw <- list(cors05$within_cors,
+                     cors01$within_cors,
+                     cors001$within_cors)
+
+  pretty.cib <- list(cors05$between_cors,
+                     cors01$between_cors,
+                     cors001$between_cors)
+
+  statsByObject$pretty.ciw <- setNames(as.list(names_sign_levels, pretty.ciw))
+  statsByObject$pretty.cib <- setNames(as.list(names_sign_levels, pretty.cib))
+
+  # actually make it pretty :)
   within <- convert_to_matrix(cors05$within_cors, cors01$within_cors, cors001$within_cors)
   between <- convert_to_matrix(cors05$between_cors, cors01$between_cors, cors001$between_cors)
 
   combined <- combine_matrices(within, between)
 
   # rename the variables and annotate tables
-  annotation_combined <- "Note. Within-group correlations are in the upper triangle, between-group correlations in the lower triangle."
-  annotation <- sprintf("*CI(%s%%) significant, **CI(%s%%) significant, ***CI(%s%%) significant.", ((1-pretty_alphas[1]) * 100), ((1-pretty_alphas[2]) * 100), ((1-pretty_alphas[3]) * 100))
+  annotation_combined <- "Note. Within-group correlations are in the upper triangle above the diagonal, between-group correlations in the lower triangle."
+  annotation <- sprintf("*(%s%%) CI excludes zero, **(%s%%) CI excludes zero, ***(%s%%) CI excludes zero.", ((1-pretty_alphas[1]) * 100), ((1-pretty_alphas[2]) * 100), ((1-pretty_alphas[3]) * 100))
   statsByObject$pretty.within <- list(matrix_to_tibble(within, var_names), annotation)
   statsByObject$pretty.between <- list(matrix_to_tibble(between, var_names), annotation)
   statsByObject$pretty.combined <- list(matrix_to_tibble(combined, var_names), annotation_combined, annotation)
@@ -193,3 +219,4 @@ matrix_to_tibble <- function(matrix, var_names) {
 calm <- function() {
   print('This is fine :)')
 }
+

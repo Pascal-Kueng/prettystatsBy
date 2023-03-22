@@ -2,7 +2,7 @@
 % Please edit documentation in R/prettystatsBy.R
 \name{statsBy}
 \alias{statsBy}
-\title{Extending the statsBy Funtionality of the Psych Package.}
+\title{Extending the statsBy Funtionality of the Psych Package}
 \usage{
 statsBy(
   data = NULL,
@@ -38,9 +38,14 @@ The function returns a psych::statsBy object that retains all
    tables with indications of significance. All original calls and exact
    confidence intervals for the single alpha level provided to the function can
    still be obtained via the regular functionality of the psych::statsBy function.
+
+use `Object$pretty`: provides a list of three dataframes ready for exporting.
+
+use `Object$pretty.ciw` or `Object$pretty.cib` to obtain lists of
+confidence intercals for the three provided alpha levels.
 }
 \description{
-Extending the statsBy Funtionality of the Psych Package.
+Extending the statsBy Funtionality of the Psych Package
 }
 \examples{
 # create the object (example 1)
@@ -56,4 +61,7 @@ print(statsByObject$pretty$between) # Full between- cluster correlation matrix
 print(statsByObject$pretty$combined) # top half are within-correlations, bottom half are between correlations.
 
 
+}
+\seealso{
+[psych::statsBy()] which this function wraps.
 }
